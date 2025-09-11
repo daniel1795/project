@@ -2,11 +2,14 @@ package com.example.project.infraestructure.persistance.adapter;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.project.application.port.out.testRepository;
 import com.example.project.domain.model.test;
 import com.example.project.infraestructure.persistance.entity.TestEntity;
 import com.example.project.infraestructure.persistance.repository.TestJpaRepository;
 
+@Repository
 public class TestRepositoyAdapter implements testRepository {
 
     private final TestJpaRepository testJpaRepository;

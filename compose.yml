@@ -6,8 +6,8 @@ services:
     env_file:
       - .env
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_USER_PWD:-root}
-      MYSQL_DATABASE: ${DB_NAME:-secure-partner}
+      MYSQL_ROOT_PASSWORD: ${DB_USER_PWD:-presys280725}
+      MYSQL_DATABASE: ${DB_NAME:-presys_db}
       MYSQL_USER: ${DB_USER:-root}
       MYSQL_PASSWORD: ${DB_USER_PWD:-root}
     ports:

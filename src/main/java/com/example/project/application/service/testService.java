@@ -2,11 +2,14 @@ package com.example.project.application.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.example.project.application.dto.testDto;
 import com.example.project.application.port.in.testuseCase;
 import com.example.project.application.port.out.testRepository;
 import com.example.project.domain.model.test;
 
+@Service
 public class testService implements testuseCase {
 
     private final testRepository testRepo;
