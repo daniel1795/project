@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_server_project
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_USER_PWD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-secure-partner}
+      MYSQL_USER: ${DB_USER:-root}
+      MYSQL_PASSWORD: ${DB_USER_PWD:-root}
+    ports:
+      - "${DB_PORT:-3309}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+    command: --local-infile=1 --secure-file-priv=/tmp
+
+volumes:
+  mysql_data:
