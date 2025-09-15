@@ -44,6 +44,32 @@ public class ProductController {
     }
 
     /**
+     * Listar todos los productos disponibles
+     * 
+     * @return Lista de todos los productos
+     */
+    @GetMapping
+    @Operation(
+        summary = "Listar todos los productos",
+        description = "Obtiene una lista de todos los productos disponibles en el sistema"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Lista de productos obtenida exitosamente",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ProductResponseDto.class)
+            )
+        )
+    })
+    public ResponseEntity<List<ProductResponseDto>> listAll() {
+        System.out.println("Listando todos los productos");
+        List<ProductResponseDto> product = productUseCase.listAll();
+        return ResponseEntity.ok(product);
+    }
+
+    /**
      * Buscar producto por ID único (UUID)
      * 
      * @param id ID único del producto
@@ -153,31 +179,6 @@ public class ProductController {
         Optional<List<ProductResponseDto>> product = productUseCase.filterByKeyword(keyword);
         return product.map(ResponseEntity::ok)
                   .orElse(ResponseEntity.notFound().build());
-    }
-
-    /**
-     * Listar todos los productos disponibles
-     * 
-     * @return Lista de todos los productos
-     */
-    @GetMapping
-    @Operation(
-        summary = "Listar todos los productos",
-        description = "Obtiene una lista de todos los productos disponibles en el sistema"
-    )
-    @ApiResponses(value = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Lista de productos obtenida exitosamente",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = ProductResponseDto.class)
-            )
-        )
-    })
-    public ResponseEntity<List<ProductResponseDto>> listAll() {
-        List<ProductResponseDto> product = productUseCase.listAll();
-        return ResponseEntity.ok(product);
     }
 
     /**

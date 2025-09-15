@@ -26,7 +26,7 @@ git --version
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone <repository-url>
+git clone <https://github.com/daniel1795/project.git>
 cd project
 ```
 
