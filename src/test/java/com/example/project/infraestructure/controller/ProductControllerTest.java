@@ -47,7 +47,9 @@ class ProductControllerTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(productController)
+                .setControllerAdvice(new GlobalExceptionHandler())
+                .build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules(); // Para soportar LocalDateTime
 
@@ -319,7 +321,7 @@ class ProductControllerTest {
         // Given
         String productId = "non-existent-id";
         when(productUseCase.updateProduct(eq(productId), any(ProductRequestDto.class)))
-                .thenThrow(new ProductNotFoundException("Product not found with id: " + productId));
+                .thenThrow(new ProductNotFoundException("Producto no encontrado con ID: " + productId));
 
         // When & Then
         mockMvc.perform(put("/api/product/{id}", productId)
